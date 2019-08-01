@@ -5,7 +5,7 @@ module.exports = {
     async getAllusers() {
         var ret;
         await db('TB_USER').then((data) => {
-            console.log(data);
+           
             ret = data;
         }).catch(err => {
             console.log(err)
