@@ -1,0 +1,6 @@
+# forummeetup
+
+
+Fala galera! pra já se adiantarem recomendo clonarem esse repositório, tirar o ".examplo" do arquivo ".env.example" e preencher as variáveis para o seu banco de dados
+
+Recomendo usarem o xampp, no mais não esquentem a cabeça, amanhã vamos começar do começo mesmo até chegar no ponto desse repositório.
