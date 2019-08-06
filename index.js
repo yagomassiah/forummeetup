@@ -1,28 +1,34 @@
-const express = require('express');
+const express = require("express");
 const server = express();
-require('dotenv-safe').load();
-const db = require('./config/knex');
-const usersRepo = require('./repos/UserRepo');
+const db = require("./config/knex");
+const usersRepo = require("./repos/UserRepo");
+
+// Carregando variaveis de ambiente
+require("dotenv-safe").config();
+
+// Porta
+const PORT = process.env.PORT || 3000;
 
 server.use(express.json());
-server.get('/', async (req, res) => {
-    var string = { message: process.env.DB + 'a' }
-    var users = await usersRepo.getAllusers();
-    var posts = await PostsRepo.getAllPosts();
-    res.send(posts);
+server.get("/", async (req, res) => {
+  var string = { message: process.env.DB + "a" };
+  var users = await usersRepo.getAllusers();
+  var posts = await PostsRepo.getAllPosts();
+  res.send(posts);
 
-   
-    //res.send(users);
+  //res.send(users);
 });
 
-require('./routes/Posts')(server);
+// Rotas
+const postsRoute = require("./routes/Posts");
+server.use("/posts", postsRoute);
 
-require('./routes/User')(server);
+const userRoute = require("./routes/User");
+server.use("/users", userRoute);
 
-require('./routes/Comments')(server);
+const commentsRoute = require("./routes/Comments");
+server.use("/comments", commentsRoute);
 
-
-
-server.listen(3000, () => {
-    console.log('%s listening at %s', server.name, 3000);
+server.listen(PORT, () => {
+  console.log(`%s listening at %s ${PORT}`);
 });
